@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ResourcesAndDataBinding.Views.CarouselViewPage" Padding="0,20,0,20">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <CarouselView x:Name="JournalList" 
+                          ItemsSource="{Binding Journals}" 
+                          CurrentItemChanged="JournalList_CurrentItemChanged" 
+                          PositionChanged="JournalList_PositionChanged" 
+                          CurrentItem="{Binding SelectedJournal}"
+                          IndicatorView="JournalIndicatorView">
+                <CarouselView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" 
+                                       SnapPointsAlignment="Center" 
+                                       SnapPointsType="Mandatory"/>
+                </CarouselView.ItemsLayout>
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HasShadow="False" BorderColor="Blue" Margin="20">
+                            <StackLayout>
+                                <Label Text="Title:"/>
+                                <Entry Text="{Binding Title}"/>
+                                <Label Text="Author's name:"/>
+                                <Entry Text="{Binding AuthorName}"/>
+                                <Label Text="Publication date:"/>
+                                <DatePicker Date="{Binding PublicationDate,Mode=TwoWay}"/>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="Is Journal Member?:" VerticalOptions="Center"/>
+                                    <CheckBox IsChecked="{Binding IsJournalMember}" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="JournalIndicatorView"
+                   IndicatorColor="LightGray"
+                   SelectedIndicatorColor="DarkGray"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
